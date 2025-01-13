@@ -37,6 +37,13 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 
+// Custom themes
+// import { ThemeProvider } from '@material-ui/core/styles';
+// import CssBaseline from '@material-ui/core/CssBaseline';
+import LightIcon from '@material-ui/icons/WbSunny';
+import { UnifiedThemeProvider} from '@backstage/theme';
+import { myTheme } from './themes/maTheme';
+
 const app = createApp({
   apis,
   bindRoutes({ bind }) {
@@ -59,6 +66,16 @@ const app = createApp({
   components: {
     SignInPage: props => <SignInPage {...props} auto providers={['guest']} />,
   },
+  themes: [{
+    id: 'my-theme',
+    title: 'My Custom Theme',
+    variant: 'light',
+    icon: <LightIcon />,
+    Provider: ({ children }) => (
+      <UnifiedThemeProvider theme={myTheme} children={children} />
+    ),
+  }],
+
 });
 
 const routes = (
